@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+
+<!-- Begin Jekyll SEO tag v2.3.0 -->
+<title>Out of sync osts | Support</title>
+<meta property="og:title" content="Out of sync osts" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="http://localhost:4000/support/out-of-sync-osts.html" />
+<meta property="og:url" content="http://localhost:4000/support/out-of-sync-osts.html" />
+<meta property="og:site_name" content="Support" />
+<script type="application/ld+json">
+{"name":null,"description":null,"url":"http://localhost:4000/support/out-of-sync-osts.html","headline":"Out of sync osts","dateModified":null,"datePublished":null,"sameAs":null,"@type":"WebPage","author":null,"image":null,"publisher":null,"mainEntityOfPage":null,"@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#157878">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/assets/css/style.css?v=a366256b1b50db8cd05618b1bf014213cab2a56a">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Support</h1>
+      <h2 class="project-tagline"></h2>
+      
+        <a href="http://github.com/intel-hpdd/Support" class="btn">View on GitHub</a>
+      
+      
+    </section>
+
+    <section class="main-content">
+      <h1 id="out-of-sync-osts">Out of sync osts</h1>
+
+<p>Sometimes IML will think that the ost index is different thant the number of OST’s you have. For example, you might have 5 OST’s:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fs-OST0000
+fs-OST0001
+fs-OST0002
+fs-OST0003
+fs-OST0004
+</code></pre></div></div>
+
+<p>You might now try to add a new OST only to find that it fails because instead of creating fs-OST0005, it attempts to create fs-OST0003, which already exists. To fix this, you simply need to reset the counter in the <code class="highlighter-rouge">chroma_core_managedfilesystem</code> table. Here is a script that will automate this for you.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#! /usr/bin/python</span>
+
+<span class="kn">import</span> <span class="nn">sys</span><span class="p">,</span> <span class="n">os</span>
+<span class="kn">import</span> <span class="nn">string</span>
+
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">'/usr/share/chroma-manager'</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s">'DJANGO_SETTINGS_MODULE'</span><span class="p">]</span> <span class="o">=</span> <span class="s">'settings'</span>
+<span class="kn">from</span> <span class="nn">django.conf</span> <span class="kn">import</span> <span class="n">settings</span>
+
+<span class="kn">from</span> <span class="nn">chroma_core.models</span> <span class="kn">import</span> <span class="n">ManagedFilesystem</span>
+
+<span class="n">ost_new_index</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="n">filesystem</span> <span class="o">=</span> <span class="n">ManagedFilesystem</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'fs'</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="s">"current ost next index: </span><span class="si">%</span><span class="s">s"</span> <span class="o">%</span> <span class="n">filesystem</span><span class="o">.</span><span class="n">ost_next_index</span>
+
+<span class="k">print</span> <span class="s">"Setting ost next index to </span><span class="si">%</span><span class="s">s"</span> <span class="o">%</span> <span class="n">ost_new_index</span>
+<span class="n">filesystem</span><span class="o">.</span><span class="n">ost_next_index</span> <span class="o">=</span> <span class="n">ost_new_index</span>
+<span class="n">filesystem</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+
+<span class="k">print</span> <span class="s">"ost next index saved! New value is: </span><span class="si">%</span><span class="s">s"</span> <span class="o">%</span> <span class="n">filesystem</span><span class="o">.</span><span class="n">ost_next_index</span>
+
+<span class="k">print</span> <span class="s">"Process completed."</span>
+</code></pre></div></div>
+
+<p>In this case, the index will be set to 5.</p>
+
+
+      <footer class="site-footer">
+        
+          <span class="site-footer-owner"><a href="http://github.com/intel-hpdd/Support">Support</a> is maintained by <a href="http://github.com/intel-hpdd">intel-hpdd</a>.</span>
+        
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a>.</span>
+      </footer>
+    </section>
+
+    
+  </body>
+</html>
