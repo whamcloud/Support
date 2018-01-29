@@ -1,0 +1,20 @@
+{
+  "name": "@iml/support",
+  "version": "0.0.1",
+  "description": "The IML support docs",
+  "scripts": {
+    "start": "bundle exec jekyll serve",
+    "link-check": "find . -name '*.md' -not -path './node_modules/*' -not -path './_site/*' | xargs -n 1 -I % sh -c 'echo %; markdown-link-check %;'"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/intel-hpdd/Support.git"
+  },
+  "author": "IML Team",
+  "devDependencies": {
+    "markdown-link-check": "^3.1.2"
+  }
+}

@@ -1,0 +1,5 @@
+*.log
+dist
+_site
+node_modules
+vendor
