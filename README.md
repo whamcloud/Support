@@ -1,6 +1,6 @@
 # Support
 
-### [**out-of-sync-osts**](support/out-of-sync-osts.md)
+### [**out-of-sync-osts**](docs/support/out-of-sync-osts.md)
 
 Welcome to IML Support. Here, we document the following:
 1. Problems encountered in support tickets and how we solved them
