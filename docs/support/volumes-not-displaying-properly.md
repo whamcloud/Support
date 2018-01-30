@@ -1,7 +1,5 @@
 # Support - Volumes Not Displaying Properly
 
-## Ticket Reference: [Dell-428](https://jira.hpdd.intel.com/browse/DELL-428)
-
 ## Overview
 Sometimes the IML state is no longer in sync with the actual state of the disks and filesystem. In the case
 of volumes, this could mean that volumes that are available may not display at all on the volumes page. It 
