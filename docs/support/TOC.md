@@ -11,3 +11,5 @@ name that already exists. Learn how to reset the OST count index.
   resolve it so that all volumes are reflected correctly.
 * [(Force) Lowering an Alert](lower-alert.md)
   - Sometimes there can be an alert that won't get lowered despite the condition that it's alerting about not being true.
+* [Cannot Add OST](cannot-add-osts.md)
+  - If an OST can't be added there could be several reasons. Check here to see common rasons and their solutions.
