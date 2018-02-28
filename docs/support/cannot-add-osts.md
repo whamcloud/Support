@@ -11,7 +11,7 @@ There may be several factors preventing an OST from being added to IML. The belo
   - [Solution](#case1-solution)
 
 <a name="case1"></a>
-### Attempting to Add an OST yields in: mkfs.lustre: <path> apparently does not exist
+### Attempting to Add an OST yields: mkfs.lustre: <path> apparently does not exist
 
 
 
@@ -30,7 +30,7 @@ oss# udevadm trigger
 oss# udevadm info --query=property --name=<device name>
 ```
 
-Look for a property called "DEVLINKS". You might find data that looks similar to this:
+Look for a property called "DEVLINKS". For example:
 ```
 # Without multipath alias
 DEVLINKS=/dev/mapper/360060e8016641330000166130000c021 /dev/disk/by-id/dm-name-360060e8016641330000166130000c021 /dev/disk/by-id/dm-uuid-mpath-360060e8016641330000166130000c021 /dev/disk/by-uuid/05fa54cd-7d12-4090-9c8f-53441f158d12 /dev/disk/by-label/home-OST0001 /dev/block/253:15
@@ -39,7 +39,7 @@ DEVLINKS=/dev/mapper/360060e8016641330000166130000c021 /dev/disk/by-id/dm-name-3
 DEVLINKS=/dev/mapper/ost01 /dev/disk/by-id/dm-name-ost01 /dev/disk/by-id/dm-uuid-mpath-360060e8016641330000166130000c021 /dev/disk/by-uuid/05fa54cd-7d12-4090-9c8f-53441f158d12 /dev/disk/by-label/home-OST0001 /dev/block/253:15
 ```
 
-The problem is more than likely that IML is attempting to add the target using `/dev/mapper/360060e8016641330000166130000c021` as the path. This path no longer exists after multipath creates an alias. 
+The problem is more than likely that IML is attempting to add the target using `/dev/mapper/360060e8016641330000166130000c021` as the path instead of `/dev/mapper/ost01`. The first path no longer exists after multipath creates an alias. 
 
 [top](#top)
 
@@ -69,6 +69,6 @@ Update the `bdev` property with the alias path that multipath has defined and sa
 ```
 {"target_name": "home-OST0001", "bdev": "/dev/mapper/ost01", "backfstype": "ext4", "mntpt": "/mnt/home-OST0001"}
 ```
-Update each target file such that the bdev path is set to the targets corresponding multipath alias. Within a few minutes IML should pick up the change on the filesystem detail page. It is important to note that IML uses longpolling to gather disk information from agent nodes so it could take up to 10 minutes for this new information to propagate up to the manager. Once it does, the target should be available to add to the filesystem and failover services should work as expected. 
+Update each target's config store such that the bdev path is set to the targets corresponding multipath alias. Once the store is updated IML will then reflect the target's information.
 
 [top](#top)
