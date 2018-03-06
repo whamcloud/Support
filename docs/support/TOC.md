@@ -2,6 +2,12 @@
 
 This is the Support table of contents. Quickly find an issue that has been solved in the past and discover how it was resolved.
 
+[Common Troubleshooting And Tips](common-troubleshooting-tips.md)
+
+---
+
+## Support Docs
+
 * [Out of Sync OST's](out-of-sync-osts.md)
   - Sometimes the OST index gets out of sync and you can no longer add an OST to your filesystem because it attempts to pick a 
 name that already exists. Learn how to reset the OST count index.
@@ -13,3 +19,10 @@ name that already exists. Learn how to reset the OST count index.
   - Sometimes there can be an alert that won't get lowered despite the condition that it's alerting about not being true.
 * [Cannot Add OST](cannot-add-osts.md)
   - If an OST can't be added there could be several reasons. Check here to see common rasons and their solutions.
+
+---
+
+## Scripts
+
+* [Import Customer's Database](scripts/import-customer-database.md)
+  - Automated script to import a customer's database
