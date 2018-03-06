@@ -27,7 +27,11 @@ rpm -Uvh --oldpackage <path-to-rpm-file>
 
 ## How do I get metric data from the database?
 ```
-# su - postgres -c "psql -t -d chroma -c  'SELECT * FROM chroma_core_sample_10 ORDER BY dt DESC LIMIT 20;'"
+# su - postgres -c "psql -d chroma -c 'select * from chroma_core_sample_10 order by dt desc limit 20;'"
+# su - postgres -c "psql -d chroma -c 'select * from chroma_core_sample_60 order by dt desc limit 20;'"
+# su - postgres -c "psql -d chroma -c 'select * from chroma_core_sample_300 order by dt desc limit 20;'"
+# su - postgres -c "psql -d chroma -c 'select * from chroma_core_sample_3600 order by dt desc limit 20;'"
+# su - postgres -c "psql -d chroma -c 'select * from chroma_core_sample_86400 order by dt desc limit 20;'"
 ```
 
 ## How do I put the chroma-agent into debug mode?
