@@ -56,4 +56,10 @@ rpm -Uvh --oldpackage <path-to-rpm-file>
 # su - postgres -c "dropdb chroma; createdb chroma; psql chroma < /tmp/db_backup_xxx.sql"
 ```
 
+## How do I interact with the device scanner?
+```
+cat - | ncat -U /var/run/device-scanner.sock | jq
+```
+This will allow you to write commands over stdin and will keep the stream open so you can see updates as they occur.
+
 [top](#top)
