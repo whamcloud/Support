@@ -39,8 +39,7 @@ rpm -Uvh --oldpackage <path-to-rpm-file>
 touch /tmp/chroma-agent-debug
 kill -s SIGUSR2 <chroma-agent-pid>
 
-# or in IML 4.1
-
+# or if systemd is available
 systemctl kill -s SIGUSR2 chroma-agent.service
 ```
 
