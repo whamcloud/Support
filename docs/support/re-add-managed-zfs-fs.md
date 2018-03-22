@@ -61,7 +61,12 @@ This procedure allows an operator to replace an existing managed mode install wi
     zfs get -Hpo value guid POOL_DS_PATH | xargs echo -n | base64
     ```
 
-    make sure to overwrite the old base64 filename with the new one.
+    make sure to overwrite the old base64 filename with the new one. ex:
+
+    ```shell
+        new_guid_b64=`zfs get -Hpo value guid oss1/fs-OST0000 | xargs echo -n | base64`
+        mv OLD_BASE64_GUID_FILENAME $new_guid_b64
+    ```
 
 1.  Update the corosync resource target attribute. To see the resources:
 
