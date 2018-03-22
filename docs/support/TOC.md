@@ -9,20 +9,21 @@ This is the Support table of contents. Quickly find an issue that has been solve
 ## Support Docs
 
 * [Out of Sync OST's](out-of-sync-osts.md)
-  - Sometimes the OST index gets out of sync and you can no longer add an OST to your filesystem because it attempts to pick a 
-name that already exists. Learn how to reset the OST count index.
+  * Sometimes the OST index gets out of sync and you can no longer add an OST to your filesystem because it attempts to pick a name that already exists. Learn how to reset the OST count index.
 * [Volumes Not Displaying Properly](volumes-not-displaying-properly.md)
-  - If the state of the database no longer reflects the state of the system it could cause your new disks to not show up on the
-  volumes page. It could also show incorrectly configured HA data for your volumes. Learn how to identify such a case and how to
-  resolve it so that all volumes are reflected correctly.
+  * If the state of the database no longer reflects the state of the system it could cause your new disks to not show up on the
+    volumes page. It could also show incorrectly configured HA data for your volumes. Learn how to identify such a case and how to
+    resolve it so that all volumes are reflected correctly.
 * [(Force) Lowering an Alert](lower-alert.md)
-  - Sometimes there can be an alert that won't get lowered despite the condition that it's alerting about not being true.
+  * Sometimes there can be an alert that won't get lowered despite the condition that it's alerting about not being true.
 * [Cannot Add OST](cannot-add-osts.md)
-  - If an OST can't be added there could be several reasons. Check here to see common rasons and their solutions.
+  * If an OST can't be added there could be several reasons. Check here to see common reasons and their solutions.
+* [Re-add managed ZFS filesystem (3.1.x only)](re-add-managed-zfs-fs.md)
+  * If you need to re-add a managed ZFS filesystem over an existing configuration. This procedure is meant for a fs that has the same targets and pool / dataset names, but different guids.
 
 ---
 
 ## Scripts
 
 * [Import Customer's Database](scripts/import-customer-database.md)
-  - Automated script to import a customer's database
+  * Automated script to import a customer's database
