@@ -59,4 +59,21 @@ systemctl kill -s SIGUSR2 chroma-agent.service
 # su - postgres -c "dropdb chroma; createdb chroma; psql chroma < /tmp/db_backup_xxx.sql"
 ```
 
+
+## How do I interact with the device scanner?
+To interact with the device-scanner in real time the following command can be used to keep the stream open such that updates can be seen as the data changes:
+```
+cat - | ncat -U /var/run/device-scanner.sock | jq
+```
+
+If interaction is not required, device info can be retrieved from the device-scanner by running the following command:
+```
+echo "{\"ACTION\": \"info\"}" | ncat -U /var/run/device-scanner.sock | jq
+```
+
+Alternatively, the following command will retrieve device data from the device-scanner as well:
+```
+echo '"Info"' | socat - UNIX-CONNECT:/var/run/device-scanner.sock | jq
+```
+
 [top](#top)
