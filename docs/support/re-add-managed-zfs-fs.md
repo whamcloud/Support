@@ -88,7 +88,6 @@ This procedure allows an operator to replace an existing managed mode install wi
 
     Note the target attribute. This is what we want to update with a new guid. To update:
 
-
     ```shell
     crm_resource --resource RESOURCE_NAME_HERE --set-parameter target --parameter-value NEW_GUID_HERE
     ```
