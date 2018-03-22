@@ -57,9 +57,19 @@ rpm -Uvh --oldpackage <path-to-rpm-file>
 ```
 
 ## How do I interact with the device scanner?
+To interact with the device-scanner in real time the following command can be used to keep the stream open such that updates can be seen as the data changes:
 ```
 cat - | ncat -U /var/run/device-scanner.sock | jq
 ```
-This will allow you to write commands over stdin and will keep the stream open so you can see updates as they occur.
+
+If interaction is not required, device info can be retrieved from the device-scanner by running the following command:
+```
+echo "{\"ACTION\": \"info\"}" | ncat -U /var/run/device-scanner.sock | jq
+```
+
+Alternatively, the following command will retrieve device data from the device-scanner as well:
+```
+echo '"Info"' | socat - UNIX-CONNECT:/var/run/device-scanner.sock | jq
+```
 
 [top](#top)
