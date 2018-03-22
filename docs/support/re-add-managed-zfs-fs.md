@@ -25,7 +25,7 @@ This procedure allows an operator to replace an existing managed mode install wi
 1.  Activate maintenance mode:
 
     ```shell
-    crm configure property maintenance-mode=true
+    pcs property set maintenance-mode=true
     ```
 
 1.  Navigate to `/var/lib/chroma/targets` and run:
@@ -132,7 +132,7 @@ This procedure allows an operator to replace an existing managed mode install wi
 1.  Deactivate maintence mode:
 
     ```shell
-    crm configure property maintenance-mode=false
+    pcs property set maintenance-mode=false
     ```
 
 1.  Start the agent:
