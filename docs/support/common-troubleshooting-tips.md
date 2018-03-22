@@ -35,9 +35,12 @@ rpm -Uvh --oldpackage <path-to-rpm-file>
 ```
 
 ## How do I put the chroma-agent into debug mode?
-```
-# touch /tmp/chroma-agent-debug
-# kill -s SIGUSR2 <chroma-agent-id>
+```bash
+touch /tmp/chroma-agent-debug
+kill -s SIGUSR2 <chroma-agent-pid>
+
+# or if systemd is available
+systemctl kill -s SIGUSR2 chroma-agent.service
 ```
 
 ## How do I backup the chroma-database?
@@ -55,6 +58,7 @@ rpm -Uvh --oldpackage <path-to-rpm-file>
 ```
 # su - postgres -c "dropdb chroma; createdb chroma; psql chroma < /tmp/db_backup_xxx.sql"
 ```
+
 
 ## How do I interact with the device scanner?
 To interact with the device-scanner in real time the following command can be used to keep the stream open such that updates can be seen as the data changes:
