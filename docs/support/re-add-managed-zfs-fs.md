@@ -8,7 +8,7 @@ This procedure allows an operator to replace an existing managed mode install wi
 
 ## On the manager node
 
-2.  stop the manager
+1.  stop the manager
 
     ```shell
     chroma-config stop
@@ -22,13 +22,13 @@ This procedure allows an operator to replace an existing managed mode install wi
     service chroma-agent stop
     ```
 
-2.  Activate maintenance mode:
+1.  Activate maintenance mode:
 
     ```shell
     crm configure property maintenance-mode=true
     ```
 
-3.  Navigate to `/var/lib/chroma/targets` and run:
+1.  Navigate to `/var/lib/chroma/targets` and run:
 
     ```shell
     for file in `ls`
@@ -55,7 +55,7 @@ This procedure allows an operator to replace an existing managed mode install wi
 
     Each entry represents a target that can be mounted on this node. Note the `uuid` and `bdev` fields to determine which files need updating.
 
-4.  For each dataset with a new guid, update the base64 encoded filename. To get the new filename for a target:
+1.  For each dataset with a new guid, update the base64 encoded filename. To get the new filename for a target:
 
     ```shell
     zfs get -Hpo value guid POOL_DS_PATH | xargs echo -n | base64
@@ -63,7 +63,7 @@ This procedure allows an operator to replace an existing managed mode install wi
 
     make sure to overwrite the old base64 filename with the new one.
 
-5.  Update the corosync resource target attribute. To see the resources:
+1.  Update the corosync resource target attribute. To see the resources:
 
     ```shell
     pcs resource show --full
@@ -103,7 +103,7 @@ This procedure allows an operator to replace an existing managed mode install wi
         python /usr/share/chroma-manager/manage.py dbshell
     ```
 
-2.  Run the following SQL commands to update guids in the db:
+1.  Run the following SQL commands to update guids in the db:
 
     ```sql
     update chroma_core_managedtarget
@@ -122,7 +122,7 @@ This procedure allows an operator to replace an existing managed mode install wi
 
     Note that `OLD_GUID` and `NEW_GUID` are the only parts of the command that should change. Everything else, including quotes and brakets should remain.
 
-3.  Start the manager:
+1.  Start the manager:
 
     ```shell
         chroma-config start
@@ -136,7 +136,7 @@ This procedure allows an operator to replace an existing managed mode install wi
     crm configure property maintenance-mode=false
     ```
 
-2.  Start the agent:
+1.  Start the agent:
 
     ```shell
     service chroma-agent start
