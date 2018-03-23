@@ -1,0 +1,58 @@
+#! /usr/bin/python
+
+# Copyright (c) 2018 Intel Corporation. All rights reserved.
+# Use of this source code is governed by a MIT-style
+# license that can be found in the LICENSE file.
+
+import urlparse
+import sys
+import os
+import subprocess
+import string
+
+sys.path.append('/usr/share/chroma-manager')
+
+from django.core.management import setup_environ
+import settings
+setup_environ(settings)
+
+from scripts.httpd_settings import get_production_httpd_settings
+import crypto
+import agent
+import manager
+
+print ''
+print 'Creating manager certificates:'
+manager.backup_certs_and_pems()
+crypto.create_authority_key_and_cert()
+
+hostname = urlparse.urlparse(settings.SERVER_HTTP_URL).hostname
+crypto.create_manager_key_and_cert(hostname)
+
+manager.update_manager_crypto()
+manager.update_view()
+
+from chroma_core.models import ManagedHost
+from chroma_core.models import ClientCertificate
+
+managed_hosts = ManagedHost.objects.all()
+client_certs = ClientCertificate.objects.all()
+
+hosts_and_certs = {}
+for host in managed_hosts:
+    filtered_certs = client_certs.filter(id=host.id)
+    if filtered_certs:
+        hosts_and_certs[host.fqdn] = filtered_certs[0].serial
+
+AUTHORITY_CERT_FILE = os.path.join(settings.CRYPTO_FOLDER, 'authority.crt')
+
+for h in managed_hosts:
+    fqdn = h.fqdn
+    print "\nMigrating certificates to {0}:".format(fqdn)
+    agent.backup_certificates(fqdn)
+    agent.upload_file(fqdn, AUTHORITY_CERT_FILE)
+    agent.generate_private_key(fqdn)
+    agent.create_self_certificate(fqdn, hosts_and_certs[str(h)])
+    agent.restart(fqdn)
+
+manager.restart()
