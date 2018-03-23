@@ -1,6 +1,6 @@
 <a name="top"></a>
 [Support Table of Contents](TOC.md)
-# Migrating an IML node to and existing ZFS Monitored Filesystem
+# Migrate an IML node to a new server while preserving an existing ZFS monitored filesystem
 
 It may be necessary to migrate an IML manager node to a new server while still using an existing ZFS Monitored filesystem with the existing MDS and OSS servers. In this case, the IML manager node will be re-installed on a new server and will be setup to communicate with the existing MDS and OSS servers.
 
@@ -10,18 +10,18 @@ It may be necessary to migrate an IML manager node to a new server while still u
 
 There are two backup methods:
 * Backup the entire database:
-```
-1. ssh into the manager node as root
-2. su -l postgres
-3. pg_dump -U chroma chroma > /tmp/db_backup_xxx.sql
-4. exit
+```shell
+# login to the manager node as root
+su -l postgres
+pg_dump -U chroma chroma > /tmp/db_backup_xxx.sql
+exit
 ```
 * Backup the database without metric data (Useful if backing up the entire database is too large):
-```
-1. ssh into the manager node as root
-2. su -l postgres
-3. pg_dump -U chroma -F p -w -T 'chroma_core_series*' -T 'chroma_core_sample*' -T 'chroma_core_logmessage*' -f /tmp/db_backup_xxx.sql
-4. exit
+```shell
+# login to the manager node as root
+su -l postgres
+pg_dump -U chroma -F p -w -T 'chroma_core_series*' -T 'chroma_core_sample*' -T 'chroma_core_logmessage*' -f /tmp/db_backup_xxx.sql
+exit
 ```
 
 [top](#top)
@@ -30,16 +30,9 @@ There are two backup methods:
 
 The new server will need to communicate with the existing MDS and OSS nodes. Ensure the following:
   * New IML Server Node:
-    * Verify that all MDS and OSS nodes are defined with the correct hostname and IP address in the /etc/hosts file. 
+    * Verify that all MDS and OSS nodes are defined with the correct hostname and IP address in the name resolution system (i.e. /etc/hosts, DNS, NIS, etc.).
   * Existing MDS and OSS nodes
-    * Verify that the IP address and hostname for the new IML server are reflected in the /etc/hosts file
-
-[top](#top)
-
-
-### Setup ssh between the new IML server and the existing MDS and OSS nodes
-
-It is important that the IML manager node can communicate with the existing MDS and OSS nodes without having to enter a password. SSH keys should be setup to ensure that the manager node can ssh into any of the MDS/OSS nodes without having to specify a password. Likewise, all MDS and OSS nodes should be able to ssh into the new IML manager node. 
+    * Verify that the IP address and hostname for the new IML server are reflected in the name resolution system (i.e. /etc/hosts, DNS, NIS, etc.).
 
 [top](#top)
 
@@ -49,13 +42,10 @@ It is important that the IML manager node can communicate with the existing MDS 
 
 ### Run the database import script.
 
-SCP the sql file from step 1 and the [import database script](scripts/import-customer-database.md) onto the new IML server. Once uploaded, ssh into the new IML server and execute the script, passing the sql filename as an argument:
-```
-scp import_database.py root@<new-iml-server-ip>:~
-scp chromadb_backup_xxx.sql root@<new-iml-server-ip>:~
-ssh root@<new-iml-server-ip>
-[~]# chmod +x import_database.py
-[~]# ./import_database.py db_backup_xxx.sql
+Upload the sql file from step 1 and the [import database script](scripts/import-customer-database.md) onto the new IML server. Once uploaded, log into the new IML server and execute the script, passing the sql filename as an argument:
+```shell
+chmod +x import_database.py
+./import_database.py db_backup_xxx.sql
 ```
 
 This will import the existing database file onto the new IML server and restart the chroma-manager service. 
@@ -68,12 +58,10 @@ Download, extract, and run the appropriate version of the sha-256 migration scri
 * [sha-256-migration-IML-2.4.x](scripts/sha-256-migration/sha-256-browser-migration-2.4.x.v1.tar.gz)
 * [sha-256-migration-IML-3.x.x](scripts/sha-256-migration/sha-256-browser-migration-3.x.x.v1.tar.gz)
 
-```
-scp sha-256-browser-migration-3.x.x.v1.tar.gz root@<new-iml-server-ip>:~
-ssh root@<new-iml-server-ip>
-[~]# tar xvf sha-256-browser-migration-3.x.x.v1.tar.gz
-[~]# cd sha-256-browser-migration-3.x.x.v1
-[~/sha-256-browser-migration-3.x.x.v1]# ./main
+```shell
+tar xvf sha-256-browser-migration-3.x.x.v1.tar.gz
+cd sha-256-browser-migration-3.x.x.v1
+./main
 ```
 
 You should have output similar to the following:
@@ -128,31 +116,15 @@ https://<hostname|IP>:443/ui/
 
 ### Update the MDS and OSS nodes to point to the new IML server
 
-**If the hostname did not change then this step is not needed.** In the event that the hostname did change, the MDS and OSS nodes need to be configured such that they point to the new hostname. To accomplish this, the chroma settings on each of the server nodes will need to be updated:
-```
-# Example for MDS1
-cd /var/lib/chroma/settings
-for i in `ls`
-do
-   echo "$i: `echo \"$i\" | base64 --decode`"
-done
+**If the hostname did not change then this step is not needed.** In the event that the hostname did change, the MDS and OSS nodes need to be configured such that they point to the new hostname. To accomplish this, the chroma settings on each of the server nodes will need to be updated. Replace `<hostname>` in the command below with the hostname of the IML server and run this command on each of the MDS and OSS nodes.
+```shell
+echo "{\"url\": \"https://<hostname>:443/agent/\"}" > /var/lib/chroma/settings/c2VydmVy
 ```
 
-This will decode each of the filenames and print their content:
-```
-bGFzdF9kZXRlY3Rfc2Nhbl90YXJnZXRfZGV2aWNlcw==: last_detect_scan_target_devices
-c2VydmVy: server
-cHJvZmlsZQ==: profile
-YWdlbnQ=: agent
-```
-
-The file that maps to `server` needs to be updated to point to the new IML server hostname. For example, if the hostname changed from `adm.lfs.local` to `adm-centos72.lfs.local`,`c2VydmVy` would be updated as follows:
-```
-{"url": "https://adm-centos72.lfs.local:443/agent/"}
-```
+Note that the filename `c2VydmVy` is base64 encoded and when decoded will read, `server`. 
 
 Restart the chroma-agent service after making this change:
-```
+```shell
 systemctl restart chroma-agent.service
 ```
 
