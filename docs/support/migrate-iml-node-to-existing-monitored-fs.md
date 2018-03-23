@@ -1,30 +1,21 @@
-<a name="top"></a>
-[Support Table of Contents](TOC.md)
-# Migrate an IML node to a new server while preserving an existing ZFS monitored filesystem
+# Migrate an IML Manager configuration to a new server while preserving an existing monitored filesystem
 
-It may be necessary to migrate an IML manager node to a new server while still using an existing ZFS Monitored filesystem with the existing MDS and OSS servers. In this case, the IML manager node will be re-installed on a new server and will be setup to communicate with the existing MDS and OSS servers.
+[Support Table of Contents](TOC.md)
+
+It may be necessary to migrate an IML manager node to a new server while still using an existing monitored filesystem with the existing MDS and OSS servers. In this case, the IML manager node will be re-installed on a new server and will be setup to communicate with the existing MDS and OSS servers.
 
 ## Performing The Migration
 
 ### Backup the database on the existing server
 
-There are two backup methods:
-* Backup the entire database:
 ```shell
 # login to the manager node as root
 su -l postgres
 pg_dump -U chroma chroma > /tmp/db_backup_xxx.sql
 exit
 ```
-* Backup the database without metric data (Useful if backing up the entire database is too large):
-```shell
-# login to the manager node as root
-su -l postgres
-pg_dump -U chroma -F p -w -T 'chroma_core_series*' -T 'chroma_core_sample*' -T 'chroma_core_logmessage*' -f /tmp/db_backup_xxx.sql
-exit
-```
 
-[top](#top)
+[top](#migrate-an-iml-manager-configuration-to-a-new-server-while-preserving-an-existing-monitored-filesystem)
 
 ### Setup server networking.
 
@@ -34,11 +25,11 @@ The new server will need to communicate with the existing MDS and OSS nodes. Ens
   * Existing MDS and OSS nodes
     * Verify that the IP address and hostname for the new IML server are reflected in the name resolution system (i.e. /etc/hosts, DNS, NIS, etc.).
 
-[top](#top)
+[top](#migrate-an-iml-manager-configuration-to-a-new-server-while-preserving-an-existing-monitored-filesystem)
 
 ### Download and Install IML.
 
-[top](#top)
+[top](#migrate-an-iml-manager-configuration-to-a-new-server-while-preserving-an-existing-monitored-filesystem)
 
 ### Run the database import script.
 
@@ -50,7 +41,7 @@ chmod +x import_database.py
 
 This will import the existing database file onto the new IML server and restart the chroma-manager service. 
 
-[top](#top)
+[top](#migrate-an-iml-manager-configuration-to-a-new-server-while-preserving-an-existing-monitored-filesystem)
 
 ### Run the sha256 migration script.
 
@@ -107,11 +98,11 @@ Stopping daemons
 Starting daemons
 ```
 
-[top](#top)
+[top](#migrate-an-iml-manager-configuration-to-a-new-server-while-preserving-an-existing-monitored-filesystem)
 
 ### Refresh the browser and accept the certificate. Make sure the browser is pointed at the home page:
 ```
-https://<hostname|IP>:443/ui/
+https://<hostname|IP>/ui/
 ```
 
 ### Update the MDS and OSS nodes to point to the new IML server
@@ -130,4 +121,4 @@ systemctl restart chroma-agent.service
 
 Repeat this process for each of the server nodes. 
 
-[top](#top)
+[top](#migrate-an-iml-manager-configuration-to-a-new-server-while-preserving-an-existing-monitored-filesystem)
