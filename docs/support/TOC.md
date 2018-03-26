@@ -27,3 +27,7 @@ This is the Support table of contents. Quickly find an issue that has been solve
 
 * [Import Customer's Database](scripts/import-customer-database.md)
   * Automated script to import a customer's database
+* [Sha-256-Migration for IML@2.4.x](scripts/sha-256-migration/sha-256-migration-2.4.x.md)
+  * Migrate certificates across cluster for IML@2.4.x
+* [Sha-256-Migration for IML@3.x.x](scripts/sha-256-migration/sha-256-migration-3.x.x.md)
+  * Migrate certificates across cluster for IML@3.x.x
