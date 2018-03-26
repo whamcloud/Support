@@ -1,6 +1,6 @@
 {
   "name": "@iml/support",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "The IML support docs",
   "scripts": {
     "start": "bundle exec jekyll serve",
