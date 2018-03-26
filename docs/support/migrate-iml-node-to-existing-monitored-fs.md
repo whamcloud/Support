@@ -46,8 +46,8 @@ This will import the existing database file onto the new IML server and restart 
 ### Run the sha256 migration script.
 
 Download, extract, and run the appropriate version of the sha-256 migration script:
-* [sha-256-migration-IML-2.4.x](scripts/sha-256-migration/sha-256-browser-migration-2.4.x.v1.tar.gz)
-* [sha-256-migration-IML-3.x.x](scripts/sha-256-migration/sha-256-browser-migration-3.x.x.v1.tar.gz)
+* [sha-256-migration-IML-2.4.x](scripts/sha-256-migration/sha-256-migration-2.4.x.md)
+* [sha-256-migration-IML-3.x.x](scripts/sha-256-migration/sha-256-migration-3.x.x.md)
 
 ```shell
 tar xvf sha-256-browser-migration-3.x.x.v1.tar.gz
