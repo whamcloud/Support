@@ -11,4 +11,4 @@ The sha-256 migration script is a tool used to migrate old certificates that wer
 * [manager.py](3.x.x/manager.py)
 * [README.md](3.x.x/README.md)
 
-Packaged Archive:
+Packaged Archive: [sha-256-migration-3.x.x](https://github.com/intel-hpdd/Support/releases/download/v0.0.2/sha-256-migration-3.x.x.tar)
