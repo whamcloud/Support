@@ -5,7 +5,7 @@
   "scripts": {
     "start": "bundle exec jekyll serve",
     "link-check": "find . -name '*.md' -not -path './node_modules/*' -not -path './_site/*' | xargs -n 1 -I % sh -c 'echo %; markdown-link-check %;'",
-    "build": "tar czf dist/sha-256-migration-2.4.x.tar -C docs/support/scripts/sha-256-migration/2.4.x . && tar czf dist/sha-256-migration-3.x.x.tar -C docs/support/scripts/sha-256-migration/3.x.x .",
+    "build": "tar czf dist/sha-256-migration-2.4.x.tar -C docs/support/scripts/sha-256-migration/2.4.x . && tar czf dist/sha-256-migration-3.x.x.tar -C docs/support/scripts/sha-256-migration/3.x.x . && tar czf dist/restore-filesystem.tar -C docs/support/scripts/restore-filesystem/restore-filesystem .",
     "postversion": "bundle exec jekyll build --destination dist --incremental && npm run build"
   },
   "publishConfig": {
