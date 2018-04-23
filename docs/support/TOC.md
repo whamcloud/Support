@@ -33,3 +33,5 @@ This is the Support table of contents. Quickly find an issue that has been solve
   * Migrate certificates across cluster for IML@2.4.x
 * [Sha-256-Migration for IML@3.x.x](scripts/sha-256-migration/sha-256-migration-3.x.x.md)
   * Migrate certificates across cluster for IML@3.x.x
+* [Restore a removed filesystem](scripts/restore-filesystem/restore-filesystem.md)
+  * Restore a filesystem that was accidentally removed from IML
