@@ -99,7 +99,7 @@ for host in hosts:
     ha.startAgent(host)
 
 print "Filesystem '%s' is now configured. You may need to wait \
-ten to 20 minutes before attempting to start \
+10 to 20 minutes before attempting to start \
 the targets." % selected_filesystem.name
 
 print "Process completed."
