@@ -22,6 +22,8 @@ This is the Support table of contents. Quickly find an issue that has been solve
   * If you need to re-add a managed ZFS filesystem over an existing configuration. This procedure is meant for a fs that has the same targets and pool / dataset names, but different guids.
 * [Migrate an IML Manager configuration to a new server while preserving an existing monitored filesystem](migrate-iml-node-to-existing-monitored-fs.md)
   * Describes how to move an IML manager node to a different server while still using the existing MDS and OSS nodes.
+* [IML Installation Fails](cannot-install-iml.md)
+  * Provides a list of things to check when IML fails to install.
 
 ---
 
