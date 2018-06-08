@@ -26,6 +26,8 @@ This is the Support table of contents. Quickly find an issue that has been solve
   * Provides a list of things to check when IML fails to install.
 * [Build Lustre RPMs against Mellanox](build-lustre-rpms-against-mellanox.md)
   * Instructions on how to build Lustre rpm's against mellanox
+* [IML Version Matrix](version-matrix.md)
+  * Matrix showing Lustre/IML versions along with the required OS version
 
 ---
 
