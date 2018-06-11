@@ -80,7 +80,7 @@ echo '"Info"' | socat - UNIX-CONNECT:/var/run/device-scanner.sock | jq
 This could be caused by a number of things:
 
 1. A dependency that was installed with node gyp may need to be re-installed properly
-2. The installed version of node could be blowing up. Try to trace through the service in question and identify where the crash is. For example, if you see the crash happen during an http request, try bringing up a node repel and making a quick http request. For example:
+2. The installed version of node could be blowing up. Try to trace through the service in question and identify where the crash is. For example, if you see the crash happen during an http request, try bringing up a node REPL and making a quick http request. For example:
 
     ```bash
     [root@somenode]# node
