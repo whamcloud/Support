@@ -37,3 +37,5 @@ This is the Support table of contents. Quickly find an issue that has been solve
   * Migrate certificates across cluster for IML@3.x.x
 * [Restore a removed filesystem](scripts/restore-filesystem/restore-filesystem.md)
   * Restore a filesystem that was accidentally removed from IML
+* [Fix Volumes](scripts/fix-volumes.md)
+  * Fix mapping issues with volumes
