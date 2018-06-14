@@ -76,7 +76,16 @@ Alternatively, the following command will retrieve device data from the device-s
 echo '"Info"' | socat - UNIX-CONNECT:/var/run/device-scanner.sock | jq
 ```
 
+## Django only returns fields that are not deleted. How do I query all fields of a model?
+
+Use `get_query_set_with_deleted` instead of `all`. For example:
+
+```
+Volume.objects.get_query_set_with_deleted().get(id=managedTarget.volume_id)
+```
+
 ## What do I do if node is crashing with a segfault?
+
 This could be caused by a number of things:
 
 1. A dependency that was installed with node gyp may need to be re-installed properly
