@@ -24,6 +24,8 @@ This is the Support table of contents. Quickly find an issue that has been solve
   * Describes how to move an IML manager node to a different server while still using the existing MDS and OSS nodes.
 * [IML Installation Fails](cannot-install-iml.md)
   * Provides a list of things to check when IML fails to install.
+* [Build Lustre RPMs against Mellanox](build-lustre-rpms-against-mellanox.md)
+  * Instructions on how to build Lustre rpm's against mellanox
 
 ---
 
