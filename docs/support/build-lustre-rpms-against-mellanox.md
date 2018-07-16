@@ -61,10 +61,8 @@ vagrant provision default --provision-with build-mellanox
 ## Download the Mellanox OFA Kernel Modules RPM
 
 ```bash
-vagrant port
-#     22 (guest) => 2205 (host)
-# Note that the password is `vagrant`
-scp -P 2205 root@localhost:/tmp/MLNX_OFED_LINUX-*_lustre.x86_64/MLNX_OFED_LINUX-*-ext/RPMS/mlnx-ofa_kernel-modules-*_lustre*.rpm .
+vagrant rsync --reverse
+# mlnx-ofa file should be under: tmp/MLNX_OFED_LINUX-*_lustre.x86_64/MLNX_OFED_LINUX-*-ext/RPMS/mlnx-ofa_kernel-modules-*_lustre*.rpm
 ```
 
 [Top](#build-lustre-rpms-against-mellanox)
@@ -84,25 +82,20 @@ LUSTRE_BRANCH=b2_10 vagrant provision default --provision-with build-lustre-rpms
 ### For non-dkms RPMs
 
 ```bash
-vagrant port
-#     22 (guest) => 2205 (host)
-# Note that the password is `vagrant`
-
-scp -P 2205 root@localhost:/tmp/lustre-release/kmod-lustre-*.el7.centos.x86_64.rpm .
-scp -P 2205 root@localhost:/tmp/lustre-release/kmod-lustre-osd-ldiskfs-*.centos.x86_64.rpm .
-scp -P 2205 root@localhost:/tmp/lustre-release/lustre-*.el7.centos.x86_64.rpm .
-scp -P 2205 root@localhost:/tmp/lustre-release/lustre-osd-ldiskfs-mount-*.el7.centos.x86_64.rpm .
-scp -P 2205 root@localhost:/tmp/lustre-release/lustre-osd-zfs-mount-*.el7.centos.x86_64.rpm .
-scp -P 2205 root@localhost:/tmp/lustre-release/lustre-resource-agents-*.el7.centos.x86_64.rpm
+vagrant rsync --reverse
+# Files of interest: 
+# tmp/lustre-release/kmod-lustre-*.el7.centos.x86_64.rpm
+# tmp/lustre-release/kmod-lustre-osd-ldiskfs-*.centos.x86_64.rpm
+# tmp/lustre-release/lustre-*.el7.centos.x86_64.rpm
+# tmp/lustre-release/lustre-osd-ldiskfs-mount-*.el7.centos.x86_64.rpm
+# tmp/lustre-release/lustre-osd-zfs-mount-*.el7.centos.x86_64.rpm
+# tmp/lustre-release/lustre-resource-agents-*.el7.centos.x86_64.rpm
 ```
 
 ### For dkms RPMs
 
 ```bash
-vagrant port
-#     22 (guest) => 2205 (host)
-# Note that the password is `vagrant`
-
+vagrant rsync --reverse
 TODO: Add dkms rpms here
 ```
 
