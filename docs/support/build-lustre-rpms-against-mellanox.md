@@ -53,7 +53,7 @@ MLNX_OFED_LINUX=$(ls MLNX_OFED_LINUX*.tgz) vagrant provision default --provision
 ## Build Mellanox Drivers against Lustre Kernel
 
 ```bash
-vagrant provision default --provision-with build-mellanox
+MLNX_OFED_LINUX=$(ls MLNX_OFED_LINUX*.tgz) vagrant provision default --provision-with build-mellanox
 ```
 
 [Top](#build-lustre-rpms-against-mellanox)
