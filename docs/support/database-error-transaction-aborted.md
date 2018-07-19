@@ -12,7 +12,7 @@ This means that a transaction did not complete successfully and can occur in ins
 
 ## Rolling back the transaction
 
-Since the transaction did not complete, the first thing that needs to be done is to roll back the aborted transaction. This can be done on using the postgres repel:
+Since the transaction did not complete, the first thing that needs to be done is to roll back the aborted transaction. This can be done on using the postgres REPL:
 
 ```bash
 cd /usr/share/chroma-manager
