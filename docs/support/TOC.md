@@ -28,6 +28,8 @@ This is the Support table of contents. Quickly find an issue that has been solve
   * Instructions on how to build Lustre rpm's against mellanox
 * [IML Version Matrix](version-matrix.md)
   * Matrix showing Lustre/IML versions along with the required OS version
+* [DatabaseError: current transaction is aborted, commands ignored until end of transaction block](database-error-transaction-aborted.md)
+  * How do you fix, "DatabaseError: current transaction is aborted, commands ignored until end of transaction block" when loading the IML GUI?
 
 ---
 
