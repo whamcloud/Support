@@ -17,7 +17,9 @@ Since the transaction did not complete, the first thing that needs to be done is
 ```bash
 cd /usr/share/chroma-manager
 python manage.py dbshell
-chroma=> rollback;
+
+# in the REPL
+rollback;
 ```
 
 After rolling back the transaction, attempt to load the IML GUI again. It's possible that a new error will appear:
