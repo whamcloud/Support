@@ -30,7 +30,7 @@ This is the Support table of contents. Quickly find an issue that has been solve
   - Matrix showing Lustre/IML versions along with the required OS version
 - [DatabaseError: current transaction is aborted, commands ignored until end of transaction block](database-error-transaction-aborted.md)
   - How do you fix, "DatabaseError: current transaction is aborted, commands ignored until end of transaction block" when loading the IML GUI?
-- [Target Operation Error: Unable to find the secondary server for `target-HA>`](target-operation-error.md)
+- [Target Operation Error: Unable to find the secondary server for `target-HA`](target-operation-error.md)
   - What causes "Unable to find the secondary server for \*" when attempting to fail over a target?
 
 ---

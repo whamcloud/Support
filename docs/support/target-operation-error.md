@@ -22,7 +22,7 @@ ${ha-label}-primary
 ${ha-label}-secondary
 ```
 
-The "Unable to find the secondary server for `target-HA`" error message indicates that the resoruces constraint is not named properly. A correct resource constraint definition looks like this:
+The "Unable to find the secondary server for `target-HA`" error message indicates that the resources constraint is not named properly. A correct resource constraint definition looks like this:
 
 ```xml
 <rsc_location id="fs-OST0000_9e8c08-primary" node="oss2.local" rsc="fs-OST0000_9e8c08" score="20"/>
