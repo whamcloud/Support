@@ -1,6 +1,7 @@
 # Out of sync osts
 
-Sometimes IML will think that the ost index is different thant the number of OST's you have. For example, you might have 5 OST's:
+Sometimes the ost_next_index will get out of sync. For example, you might have 5 OST's:
+
 ```
 fs-OST0000
 fs-OST0001
@@ -9,33 +10,15 @@ fs-OST0003
 fs-OST0004
 ```
 
-You might now try to add a new OST only to find that it fails because instead of creating fs-OST0005, it attempts to create fs-OST0003, which already exists. To fix this, you simply need to reset the counter in the `chroma_core_managedfilesystem` table. Here is a script that will automate this for you.
+You might now try to add a new OST only to find that it fails because instead of creating fs-OST0005, it attempts to create fs-OST0003, which already exists. This is caused by a bug in the object caching in IML versions prior to 3.0. To fix this, you will need to:
 
-```
-#! /usr/bin/python
+1. Reset the next_ost_index counter in the `chroma_core_managedfilesystem` table to the appropriate value.
+1. Update the mount point in the `chroma_core_managedtargetmount` table.
+1. Update the `name`, `ha_label`, and `active_mount_id` in the `chroma_core_managedtarget` table.
+1. Re-fromat the device using the command from the status page (but with the appropriate index).
 
-import sys, os
-import string
+The following video describes how to resolve the issue:
 
-sys.path.append('/usr/share/chroma-manager')
-os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
-from django.conf import settings
-
-from chroma_core.models import ManagedFilesystem
-
-ost_new_index = 5
-
-filesystem = ManagedFilesystem.objects.get(name='fs')
-
-print "current ost next index: %s" % filesystem.ost_next_index
-
-print "Setting ost next index to %s" % ost_new_index
-filesystem.ost_next_index = ost_new_index
-filesystem.save()
-
-print "ost next index saved! New value is: %s" % filesystem.ost_next_index
-
-print "Process completed."
-```
-
-In this case, the index will be set to 5.
+<div style="margin: 0 auto; width: 640px;">
+  <iframe src="https://player.vimeo.com/video/301859928" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+</div>
