@@ -2,11 +2,11 @@
 
 [Support Table of Contents](TOC.md)
 
-If IML respnods with a 502 it means that a service is not responding as expected. This could be caused by a number of issues. The items below list some troubleshooting tips when encountering this error.
+If IML responds with a 502 it means that a manager service is not responding as expected. This could be caused by a number of issues. The items below list some troubleshooting tips when encountering this error.
 
 ## Check the load on the node
 
-It's possible that the process load is too high or the memory is exhausted on the manager node. You can check this by sshing into and running `htop` on the manager node. Once loaded, check the process load and the memory pressure (in particular, the amount of virtual memory taking place).
+It's possible that the process load is too high or the memory is exhausted on the manager node. You can check this by sshing into and running `top` on the manager node. Once loaded, check the process load and the memory pressure (in particular, the amount of virtual memory taking place).
 
 ## Job Scheduler Throttling
 
