@@ -32,6 +32,8 @@ This is the Support table of contents. Quickly find an issue that has been solve
   - How do you fix, "DatabaseError: current transaction is aborted, commands ignored until end of transaction block" when loading the IML GUI?
 - [Target Operation Error: Unable to find the secondary server for `target-HA`](target-operation-error.md)
   - What causes "Unable to find the secondary server for \*" when attempting to fail over a target?
+- [IML Responds with 502](iml-responds-with-502.md)
+  - What can cause IML to respond with a 502 when loading the page?
 
 ---
 
