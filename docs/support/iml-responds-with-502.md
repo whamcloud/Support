@@ -2,7 +2,7 @@
 
 [Support Table of Contents](TOC.md)
 
-If IML responds with a 502 it means that a manager service is not responding as expected. This could be caused by a number of issues. The items below list some troubleshooting tips when encountering this error.
+If IML responds with a 502 it means that a manager service is not responding as expected. This could be caused by a number of issues. The items below list some troubleshooting tips when encountering this error. In addition to these tips, it will be helpful to look through the logs under `/var/log/chroma/` on the manager node. These logs may contain error messages, tracebacks, or other useful information. Finally, it may be helpful to collect IML diagnostics by running `iml-diagnostics`. This will generate a compressed file containing all of the logs and much more that can aid in troubleshooting the problem.
 
 ## Check the load on the node
 
