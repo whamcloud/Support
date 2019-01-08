@@ -34,6 +34,8 @@ This is the Support table of contents. Quickly find an issue that has been solve
   - What causes "Unable to find the secondary server for \*" when attempting to fail over a target?
 - [IML Responds with 502](iml-responds-with-502.md)
   - What can cause IML to respond with a 502 when loading the page?
+- [How To Upgrade IML](how-to-upgrade-iml.md)
+  - Learn how to upgrade IML with visual steps.
 
 ---
 
