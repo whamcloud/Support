@@ -36,6 +36,8 @@ This is the Support table of contents. Quickly find an issue that has been solve
   - What can cause IML to respond with a 502 when loading the page?
 - [How To Upgrade IML](how-to-upgrade-iml.md)
   - Learn how to upgrade IML with visual steps.
+- [How to Build IML@4.0.x](iml-4.0.x-build-instructions)
+  - Learn how to build IML@4.0.x locally
 
 ---
 
