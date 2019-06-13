@@ -36,6 +36,8 @@ This is the Support table of contents. Quickly find an issue that has been solve
   - What can cause IML to respond with a 502 when loading the page?
 - [How To Upgrade IML](how-to-upgrade-iml.md)
   - Learn how to upgrade IML with visual steps.
+- [AMQP Connection shows Blocked Key Error](amqp-connection-blocked-key-error.md)
+  - Learn how to resolve the blocked.error key reported in the job scheduler and http log.
 
 ---
 
