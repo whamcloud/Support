@@ -43,6 +43,7 @@ rpm -Uvh --oldpackage <path-to-rpm-file>
 ## How do I put the chroma-agent into debug mode?
 
 ```bash
+touch /tmp/chroma-agent-debug
 systemctl kill -s SIGUSR2 chroma-agent.service
 ```
 
